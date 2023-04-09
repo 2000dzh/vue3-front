@@ -1,9 +1,11 @@
-<script setup lang="ts">
-console.log(import.meta.env)
-</script>
-
 <template>
-	<div>1</div>
+  <RouterView />
 </template>
 
-<style scoped></style>
+<script setup lang="ts"></script>
+
+<style scoped lang="scss">
+.main {
+  width: 100%;
+}
+</style>
