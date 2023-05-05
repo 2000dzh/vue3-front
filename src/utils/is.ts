@@ -48,10 +48,6 @@ export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
 }
 
-export function isBoolean(val: unknown): val is boolean {
-  return is(val, 'Boolean')
-}
-
 export function isRegExp(val: unknown): val is RegExp {
   return is(val, 'RegExp')
 }

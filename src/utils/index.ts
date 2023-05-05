@@ -37,3 +37,18 @@ export function deepMerge<T extends _obj, U extends _obj>(target: T, source: U) 
     }
   })
 }
+
+/**
+ * @description 获取删除后页码
+ * @param total 总页数
+ * @param pageSize 每页显示条目数
+ * @param currentPage 当前页
+ * @param num 删除数据数
+ * @returns 删除后页码
+ */
+export function calculateDeletedPage(total: number, pageSize: number, currentPage: number, num = 1) {
+  const totalPage = Math.ceil((total - num) / pageSize)
+  const pageNum = currentPage > totalPage ? totalPage : currentPage
+  return pageNum < 1 ? 1 : pageNum
+}
+
