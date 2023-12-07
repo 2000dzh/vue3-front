@@ -1,4 +1,5 @@
 import LAYOUT from '@/layouts/index.vue'
+
 import type { AppRouteRecordRaw } from '@/router/types'
 
 export const aomRoutes: AppRouteRecordRaw = {

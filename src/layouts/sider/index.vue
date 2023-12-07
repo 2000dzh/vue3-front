@@ -13,9 +13,10 @@
 </template>
 
 <script setup lang="ts">
+import SidebarItem from './sidebarItem.vue'
+
 import { sidebarRouting } from '@/router/modules'
 import type { AppRouteRecordRaw } from '@/router/types'
-import SidebarItem from './sidebarItem.vue'
 
 defineOptions({
   name: 'Sider',
@@ -74,6 +75,7 @@ function recursiveLookup(arr: siderArr, str: string, index = 0): AppRouteRecordR
 }
 
 transformArr(sidebarRouting, '')
+console.log(routers)
 </script>
 
 <style scoped lang="scss">
