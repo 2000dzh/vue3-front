@@ -1,5 +1,6 @@
-import { camelize } from '@vue/shared'
-import { isObject, isNumber, isString } from '../is'
+import { camelize } from 'vue'
+
+import { isNumber, isObject, isString } from '../is'
 import { entriesOf, keysOf } from '../objects'
 import type { CSSProperties } from 'vue'
 
@@ -52,30 +53,30 @@ export const getStyle = (element: HTMLElement, styleName: keyof CSSProperties): 
   }
 }
 
-export const setStyle = (element: HTMLElement, styleName: CSSProperties | keyof CSSProperties, value?: string | number) => {
-  if (!element || !styleName) {
-    return
-  }
+// export const setStyle = (element: HTMLElement, styleName: CSSProperties | keyof CSSProperties, value?: string | number) => {
+//   if (!element || !styleName) {
+//     return
+//   }
 
-  if (isObject(styleName)) {
-    entriesOf(styleName).forEach(([prop, value]) => setStyle(element, prop, value))
-  } else {
-    const key: any = camelize(styleName)
-    element.style[key] = value as any
-  }
-}
+//   if (isObject(styleName)) {
+//     entriesOf(styleName).forEach(([prop, value]) => setStyle(element, prop, value))
+//   } else {
+//     const key: any = camelize(styleName)
+//     element.style[key] = value as any
+//   }
+// }
 
-export const removeStyle = (element: HTMLElement, style: CSSProperties | keyof CSSProperties) => {
-  if (!element || !style) {
-    return
-  }
+// export const removeStyle = (element: HTMLElement, style: CSSProperties | keyof CSSProperties) => {
+//   if (!element || !style) {
+//     return
+//   }
 
-  if (isObject(style)) {
-    keysOf(style).forEach((prop) => removeStyle(element, prop))
-  } else {
-    setStyle(element, style, '')
-  }
-}
+//   if (isObject(style)) {
+//     keysOf(style).forEach((prop) => removeStyle(element, prop))
+//   } else {
+//     setStyle(element, style, '')
+//   }
+// }
 
 export function addUnit(value?: string | number, defaultUnit = 'px') {
   if (!value) return ''

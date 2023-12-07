@@ -6,15 +6,16 @@
         <SidebarItem :routers="obj.children" />
       </el-menu-item-group>
     </el-sub-menu>
-    <el-menu-item v-else :index="obj.path">
+    <el-menu-item v-else :key="obj.path" :index="obj.path">
       <template #title>{{ obj.name }} </template>
     </el-menu-item>
   </template>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { AppRouteRecordRaw } from '@/router/types'
+
+import type { PropType } from 'vue'
 
 defineOptions({
   name: 'SidebarItem',
@@ -23,7 +24,7 @@ defineOptions({
 const props = defineProps({
   routers: {
     type: Array as PropType<AppRouteRecordRaw[]>,
-    default: [],
+    default: () => [],
   },
 })
 </script>

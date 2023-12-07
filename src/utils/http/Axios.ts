@@ -1,10 +1,12 @@
-import type { AxiosRequestConfig, AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import type { RequestOptions, Result } from '#/axios'
-import type { CreateAxiosOptions } from './axiosTransform'
-import { AxiosCanceler } from './axiosCancel'
 import axios from 'axios'
 import { cloneDeep } from 'lodash-es'
+
 import { isFunction } from '@/utils/is'
+
+import { AxiosCanceler } from './axiosCancel'
+import type { CreateAxiosOptions } from './axiosTransform'
+import type { RequestOptions, Result } from '#/axios'
+import type { AxiosError,AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 export class VAxios {
   private axiosInstance: AxiosInstance

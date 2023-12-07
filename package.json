@@ -6,31 +6,42 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix"
   },
   "dependencies": {
-    "@types/lodash-es": "^4.17.7",
-    "@vueuse/core": "^10.0.2",
+    "@vueuse/core": "^10.7.0",
     "await-to-js": "^3.0.0",
     "axios": "^1.3.4",
     "dayjs": "^1.11.7",
-    "element-plus": "^2.3.1",
+    "element-plus": "^2.4.3",
     "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.33",
-    "sass": "^1.59.3",
-    "type-fest": "^3.8.0",
-    "vue": "^3.2.45",
+    "vue": "^3.3.10",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.9",
     "@types/node": "^18.14.1",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "@vitejs/plugin-vue": "^4.0.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "rollup-plugin-external-globals": "^0.8.0",
+    "sass": "^1.68.0",
+    "type-fest": "^4.3.1",
     "typescript": "^4.9.3",
     "unplugin-auto-import": "^0.15.1",
     "unplugin-vue-components": "^0.24.1",
     "unplugin-vue-define-options": "^1.3.3",
-    "vite": "^4.1.0",
+    "vite": "^4.5.1",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-html": "^3.2.0",
     "vue-tsc": "^1.0.24"
   }
 }

@@ -1,7 +1,8 @@
 import { cloneDeep, isEqual, mergeWith, unionWith } from 'lodash-es'
-import { isArray, isObject } from './is'
-type _obj = object | null | undefined
 
+import { isArray, isObject } from './is'
+
+type _obj = object | null | undefined
 /**
  * @description 将该对象作为参数添加到URL中
  * @param baseUrl url
@@ -12,7 +13,7 @@ type _obj = object | null | undefined
  *  setObjToUrlParams('www.baidu.com', obj)
  *  ==>www.baidu.com?a=3&b=4
  */
-function setObjToUrlParams(baseUrl: string, obj: any): string {
+export function setObjToUrlParams(baseUrl: string, obj: any): string {
   let parameters = ''
   for (const key in obj) {
     parameters += key + '=' + encodeURIComponent(obj[key]) + '&'
@@ -52,3 +53,35 @@ export function calculateDeletedPage(total: number, pageSize: number, currentPag
   return pageNum < 1 ? 1 : pageNum
 }
 
+/**
+ * @description vue3中获取组件实例类型
+ * @param _comp 组件实例
+ * @returns 组件实例类型
+ */
+export function useCompRef<T extends abstract new (...args: any) => any>(_comp: T) {
+  return ref<InstanceType<T>>()
+}
+
+/**
+ * @description 递归查找
+ * @param arr 源数组
+ * @param id 标识
+ * @param index
+ * @returns 对应数据
+ */
+export function recursiveLookup(arr: any[], id: any, index: number): any {
+  if (index >= arr.length) {
+    return false
+  }
+  const obj = arr[index]
+  if (obj.id === id) {
+    return obj
+  }
+  if (obj.children && obj.children.length) {
+    const result = recursiveLookup(obj.children, id, 0)
+    if (result) {
+      return result
+    }
+  }
+  return recursiveLookup(arr, id, index + 1)
+}
