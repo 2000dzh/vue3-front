@@ -12,17 +12,11 @@ import { debounce } from 'lodash-es'
 
 import { miniDebounce } from '@/utils/lodash/debounce'
 
-
-
 defineOptions({
   name: 'Workbench',
 })
 const num = ref(0)
 const num1 = ref(0)
-function fn11<T>(this: T) {
-  console.log(this)
-  num.value++
-}
 
 const obj = {
   a: 11,

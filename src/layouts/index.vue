@@ -6,7 +6,11 @@
     <el-container>
       <el-header>Header</el-header>
       <el-main>
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+          <KeepAlive>
+            <component :is="Component" />
+          </KeepAlive>
+        </RouterView>
       </el-main>
     </el-container>
   </el-container>
@@ -18,7 +22,6 @@ import Sider from './sider/index.vue'
 defineOptions({
   name: 'Layouts',
 })
-
 </script>
 
 <style scoped lang="scss">
@@ -33,6 +36,9 @@ defineOptions({
     width: calc(100% - 200px);
     height: 100%;
     background-color: red;
+  }
+  .el-aside {
+    font-size: 20px;
   }
 }
 </style>

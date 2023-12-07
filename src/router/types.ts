@@ -1,5 +1,6 @@
-import type { RouteRecordRaw, RouteMeta } from 'vue-router'
 import { defineComponent } from 'vue'
+
+import type { RouteMeta,RouteRecordRaw } from 'vue-router'
 
 export interface AppRouteRecordRaw {
 	name: string

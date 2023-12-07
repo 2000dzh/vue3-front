@@ -4,6 +4,7 @@
       <!-- To render the slot -->
       <component :is="$slots.default" />
     </div>
+    1
   </DefineTemplate>
   <ReuseTemplate>
     <div>Some content</div>
@@ -16,9 +17,7 @@
   <Login />
 </template>
 <script lang="ts" setup>
-// import { ElTreeV2 } from 'element-plus'
 // import { useCompRef } from '../utils'
-import { createReusableTemplate } from '@vueuse/core'
 
 import Login from './login/index.vue'
 

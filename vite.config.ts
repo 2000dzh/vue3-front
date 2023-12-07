@@ -1,12 +1,10 @@
 import vue from '@vitejs/plugin-vue'
+import path from 'node:path'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
-import DefineOptions from 'unplugin-vue-define-options/dist/vite'
 import { defineConfig, loadEnv } from 'vite'
-// import { createHtmlPlugin } from 'vite-plugin-html'
-// import externalGlobals from 'rollup-plugin-external-globals'
 
 export default defineConfig(({ mode }: any) => {
   const env = loadEnv(mode, process.cwd())
@@ -14,53 +12,46 @@ export default defineConfig(({ mode }: any) => {
     base: env.VITE_NODE_ENV === 'production' ? './' : '/',
     plugins: [
       vue(),
+      // 自动导入
       AutoImport({
-        resolvers: [ElementPlusResolver()],
-        imports: ['vue', 'vue-router'],
-        dts: 'src/auto-import.d.ts',
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
+        imports: ['vue', 'vue-router', '@vueuse/core'],
+        // 通过一个自定义函数从组件名称中解析组件导入路径(PascalCase)主要用来扩展外部资源
+        resolvers: [
+          // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+          ElementPlusResolver(),
+        ],
+        // 是否在 vue 模板中自动导入
+        vueTemplate: true,
+        // 自动导入目录的路径
+        dirs: ['src'],
+        //  配置文件生成位置，默认是根目录 /auto-imports.d.ts
+        dts: path.resolve(__dirname, 'types', 'auto-import.d.ts'),
       }),
+      // 自动注册组件
       Components({
-        resolvers: [ElementPlusResolver()],
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
+        // 自动注册项目 指定路径 下组件为全局组件
+        dirs: ['src/components'],
+        // 组件有效的扩展名
+        extensions: ['vue', 'tsx'],
+         // 通过一个自定义函数从组件名称中解析组件导入路径(PascalCase)主要用来扩展外部资源
+        resolvers: [
+          // 自动导入 Element Plus 组件
+          ElementPlusResolver()
+        ],
+        // 配置文件生成位置，默认是根目录 /components.d.ts
+        dts: path.resolve(__dirname, 'types', 'components.d.ts'),
       }),
-      DefineOptions(),
-      // createHtmlPlugin({
-      //   template: 'index.html',
-      //   inject: {
-      //     tags: [
-      //       {
-      //         tag: 'script',
-      //         injectTo: 'head',
-      //         attrs: {
-      //       src: 'https://unpkg.com/vue@3.2.45/dist/vue.global.js',
-      //         },
-      //       },
-      //       {
-      //         tag: 'link',
-      //         injectTo: 'head',
-      //         attrs: {
-      //           src: 'https://unpkg.com/element-plus@2.3.14/dist/index.css',
-      //         },
-      //       },
-      //       {
-      //         tag: 'script',
-      //         injectTo: 'head',
-      //         attrs: {
-      //           src: 'https://unpkg.com/element-plus@2.3.14/dist/index.full.js',
-      //         },
-      //       },
-      //     ],
-      //   },
-      // }),
     ],
     server: {
       open: false,
       hmr: true,
-      port: 443
+      port: 443,
     },
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
-        // vue: 'https://esm.sh/vue@3.2.3',
       },
     },
     build: {
@@ -71,13 +62,6 @@ export default defineConfig(({ mode }: any) => {
           entryFileNames: 'static/js/[name]-[hash].js',
           assetFileNames: 'static/[ext]/name-[hash].[ext]',
         },
-        // external: ['element-plus'],
-        // plugins: [
-        //   externalGlobals({
-        //     // vue: 'Vue',
-        //     'element-plus': 'ElementPlus',
-        //   }),
-        // ],
       },
     },
   }
