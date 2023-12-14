@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
+import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig(({ mode }: any) => {
   const env = loadEnv(mode, process.cwd())
@@ -35,19 +36,25 @@ export default defineConfig(({ mode }: any) => {
         dirs: ['src/components'],
         // 组件有效的扩展名
         extensions: ['vue', 'tsx'],
-         // 通过一个自定义函数从组件名称中解析组件导入路径(PascalCase)主要用来扩展外部资源
+        // 通过一个自定义函数从组件名称中解析组件导入路径(PascalCase)主要用来扩展外部资源
         resolvers: [
           // 自动导入 Element Plus 组件
-          ElementPlusResolver()
+          ElementPlusResolver(),
         ],
         // 配置文件生成位置，默认是根目录 /components.d.ts
         dts: path.resolve(__dirname, 'types', 'components.d.ts'),
       }),
+      // 调试页面及插件
+      Inspect(),
     ],
     server: {
+      // 指定端口
+      port: 443,
+      // 是否自动在浏览器打开
       open: false,
       hmr: true,
-      port: 443,
+      // 方向代理
+      proxy: {},
     },
     resolve: {
       alias: {
@@ -55,7 +62,16 @@ export default defineConfig(({ mode }: any) => {
       },
     },
     build: {
+      // 打包后文件夹名称
       outDir: 'dist',
+      // 打包后去除 console debugger(需要安装 terser )      
+      minify: 'terser' as const,
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
       rollupOptions: {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
@@ -64,5 +80,5 @@ export default defineConfig(({ mode }: any) => {
         },
       },
     },
-  }
+  } 
 })
