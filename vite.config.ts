@@ -5,6 +5,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
+// gzip 压缩 https://juejin.cn/post/7021898702692286478
+// import viteCompression from 'vite-plugin-compression'
+
 import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig(({ mode }: any) => {
@@ -64,7 +67,7 @@ export default defineConfig(({ mode }: any) => {
     build: {
       // 打包后文件夹名称
       outDir: 'dist',
-      // 打包后去除 console debugger(需要安装 terser )      
+      // 打包后去除 console debugger(需要安装 terser )
       minify: 'terser' as const,
       terserOptions: {
         compress: {
@@ -80,5 +83,5 @@ export default defineConfig(({ mode }: any) => {
         },
       },
     },
-  } 
+  }
 })
