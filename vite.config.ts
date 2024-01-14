@@ -7,7 +7,6 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 // gzip 压缩 https://juejin.cn/post/7021898702692286478
 // import viteCompression from 'vite-plugin-compression'
-
 import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig(({ mode }: any) => {
