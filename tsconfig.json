@@ -8,7 +8,7 @@
     "jsx": "preserve",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "types": ["vite/client", "unplugin-vue-define-options/macros-global"],
+    "types": ["vite/client"],
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
